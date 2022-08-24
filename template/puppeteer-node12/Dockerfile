@@ -5,8 +5,8 @@ ENV APT_KEY_DONT_WARN_ON_DANGEROUS_USAGE=1
 ARG ADDITIONAL_PACKAGE
 
 RUN if test -n "${ADDITIONAL_PACKAGE}"; then apt-get update \
-    && apt-get install -y curl gnupg \
-    && curl -sLSf https://dl-ssl.google.com/linux/linux_signing_key.pub -o - | apt-key add - \
+    && apt-get install -y curl gnupg wget \
+    && sh -c 'wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | gpg --dearmor - > /etc/apt/trusted.gpg.d/google-linux-key.gpg' \
     && apt-get update ;fi
 
 RUN if test -n "${ADDITIONAL_PACKAGE}"; then apt-get install -y ${ADDITIONAL_PACKAGE} --no-install-recommends \
