@@ -1,4 +1,4 @@
-language: puppeteer-node12
+language: puppeteer-node12-arle
 fprocess: node index.js
 build_options:
   - name: emojis
